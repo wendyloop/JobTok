@@ -1,0 +1,1 @@
+-- Intentionally empty. The project uses migrations for schema and policy setup.
