@@ -176,12 +176,25 @@
       margin: 0 0 20px;
     }
     h1 em {
+      position: relative;
       font-style: normal;
-      background: rgba(245, 205, 40, 0.55);
-      border-radius: 6px;
-      padding: 0 8px;
+      padding: 0 10px 2px;
       display: inline-block;
       line-height: 1.1;
+      z-index: 0;
+    }
+    h1 em::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      right: 0;
+      top: 52%;
+      bottom: 4%;
+      background: rgba(245, 205, 40, 0.42);
+      border-radius: 999px 14px 999px 18px;
+      transform: rotate(-1.4deg) skewX(-8deg);
+      z-index: -1;
+      box-shadow: 0 0 0 1px rgba(245, 205, 40, 0.08);
     }
     .hero-sub {
       font-size: clamp(1.05rem, 2.5vw, 1.22rem);
