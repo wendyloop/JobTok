@@ -40,9 +40,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Supabase JS -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
     /* ── Reset & Variables ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -128,8 +125,7 @@
 
     /* ── Hero ── */
     #hero {
-      padding: 88px 24px 72px;
-      text-align: center;
+      padding: 72px 24px 56px;
       position: relative;
       overflow: hidden;
     }
@@ -143,6 +139,17 @@
       height: 700px;
       background: radial-gradient(circle, rgba(245,205,40,0.35) 0%, transparent 70%);
       pointer-events: none;
+    }
+    .hero-layout {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 440px);
+      gap: 32px;
+      align-items: center;
+    }
+    .hero-copy {
+      text-align: left;
     }
     .hero-badge {
       display: inline-flex;
@@ -165,8 +172,8 @@
       line-height: 1.06;
       letter-spacing: -2.5px;
       color: var(--black);
-      max-width: 780px;
-      margin: 0 auto 20px;
+      max-width: 680px;
+      margin: 0 0 20px;
     }
     h1 em {
       font-style: normal;
@@ -179,39 +186,32 @@
     .hero-sub {
       font-size: clamp(1.05rem, 2.5vw, 1.22rem);
       color: var(--gray-700);
-      max-width: 520px;
-      margin: 0 auto 36px;
+      max-width: 560px;
+      margin: 0 0 24px;
       font-weight: 500;
       line-height: 1.55;
     }
-    .hero-cta-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--black);
-      color: var(--yellow);
-      padding: 16px 36px;
-      border-radius: var(--radius);
-      font-size: 1rem;
-      font-weight: 800;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: all var(--transition);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-      letter-spacing: -0.2px;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.22); }
     .hero-note {
-      font-size: 0.8rem;
+      font-size: 0.84rem;
       color: var(--gray-500);
-      font-weight: 500;
+      font-weight: 600;
+    }
+    .hero-form-card {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-form-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.8px;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .hero-form-desc {
+      font-size: 0.92rem;
+      color: var(--gray-500);
+      margin-bottom: 20px;
     }
 
     /* ── Features ── */
@@ -252,39 +252,6 @@
       line-height: 1.6;
     }
 
-    /* ── Waitlist Form Section ── */
-    #waitlist {
-      padding: 72px 24px 96px;
-    }
-    .form-container {
-      max-width: 520px;
-      margin: 0 auto;
-    }
-    .section-eyebrow {
-      text-align: center;
-      margin-bottom: 8px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--yellow-dark);
-    }
-    .section-title {
-      text-align: center;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      color: var(--black);
-      margin-bottom: 12px;
-      line-height: 1.1;
-    }
-    .section-desc {
-      text-align: center;
-      font-size: 0.95rem;
-      color: var(--gray-500);
-      margin-bottom: 36px;
-      line-height: 1.6;
-    }
     .form-card {
       background: var(--white);
       border-radius: var(--radius-lg);
@@ -332,95 +299,6 @@
       box-shadow: 0 0 0 3px rgba(245, 205, 40, 0.2);
     }
     input::placeholder { color: var(--gray-300); }
-
-    /* ── File Upload Areas ── */
-    .file-upload-area {
-      border: 2px dashed var(--gray-300);
-      border-radius: var(--radius-sm);
-      padding: 20px 16px;
-      text-align: center;
-      cursor: pointer;
-      transition: all var(--transition);
-      position: relative;
-      background: var(--gray-100);
-    }
-    .file-upload-area:hover,
-    .file-upload-area.drag-over {
-      border-color: var(--yellow);
-      background: var(--yellow-soft);
-    }
-    .file-upload-area input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
-    }
-    .upload-icon { font-size: 1.6rem; margin-bottom: 6px; display: block; pointer-events: none; }
-    .upload-label-text {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--charcoal);
-      pointer-events: none;
-      display: block;
-    }
-    .upload-hint {
-      font-size: 0.75rem;
-      color: var(--gray-500);
-      margin-top: 3px;
-      pointer-events: none;
-      display: block;
-    }
-    .file-selected {
-      display: none;
-      align-items: center;
-      gap: 10px;
-      background: var(--yellow-soft);
-      border: 1.5px solid var(--yellow);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      margin-top: 8px;
-    }
-    .file-selected.visible { display: flex; }
-    .file-selected-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--charcoal);
-      flex: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .file-remove {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--gray-500);
-      font-size: 1rem;
-      padding: 2px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      transition: color var(--transition);
-    }
-    .file-remove:hover { color: #E53E3E; }
-    .video-duration {
-      font-size: 0.75rem;
-      color: var(--gray-500);
-      margin-top: 4px;
-    }
-    .video-duration.error { color: #E53E3E; font-weight: 600; }
-    .video-duration.ok { color: #16A34A; font-weight: 600; }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 24px 0 20px;
-    }
-    .divider-line { flex: 1; height: 1px; background: var(--gray-300); }
-    .divider-text { font-size: 0.75rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.06em; }
 
     /* ── Submit Button ── */
     .btn-submit {
@@ -532,6 +410,20 @@
       .form-card { padding: 28px 20px; }
       h1 { letter-spacing: -1.5px; }
     }
+    @media (max-width: 900px) {
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .hero-copy {
+        text-align: center;
+      }
+      h1,
+      .hero-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -543,7 +435,7 @@
         <span aria-hidden="true">🧳</span>
         JobTok
       </a>
-      <a class="nav-cta" href="#waitlist" aria-label="Join the early waitlist">
+      <a class="nav-cta" href="#signup-card" aria-label="Join the early waitlist">
         Join Waitlist ↓
       </a>
     </div>
@@ -552,81 +444,42 @@
   <!-- ── Hero ── -->
   <main>
     <section id="hero" aria-labelledby="hero-headline">
-      <div class="hero-badge" aria-label="Status: Early Access">Early Access</div>
-      <h1 id="hero-headline">
-        Your resume is boring.<br />
-        <em>You're not.</em>
-      </h1>
-      <p class="hero-sub">
-        JobTok is the video-first recruiting platform where candidates get discovered. Skip the stack of PDFs — show companies who you actually are.
-      </p>
-      <div class="hero-cta-group">
-        <a class="btn-primary" href="#waitlist" aria-label="Secure your early spot on the waitlist">
-          🧳 Secure Your Spot
-        </a>
-        <span class="hero-note">Free · No credit card · Early candidates get seen first</span>
-      </div>
-    </section>
+      <div class="hero-layout">
+        <div class="hero-copy">
+          <div class="hero-badge" aria-label="Status: Early Access">Early Access</div>
+          <h1 id="hero-headline">
+            Your resume is boring.<br />
+            <em>You're not.</em>
+          </h1>
+          <p class="hero-sub">
+            JobTok is the video-first recruiting platform where candidates get discovered. Join the waitlist now and be one of the first people companies see when we launch.
+          </p>
+          <p class="hero-note">Free · No credit card · Early candidates get seen first</p>
+        </div>
 
-    <!-- ── Feature cards ── -->
-    <section id="why" aria-labelledby="why-title">
-      <h2 id="why-title" class="sr-only">Why JobTok</h2>
-      <div class="features-grid" role="list">
-        <article class="feature-card" role="listitem">
-          <span class="feature-icon" aria-hidden="true">🎬</span>
-          <h3>Video-first profiles</h3>
-          <p>Upload a 60-second intro or link your professional TikTok. Let companies see your personality before the first interview.</p>
-        </article>
-        <article class="feature-card" role="listitem">
-          <span class="feature-icon" aria-hidden="true">🏆</span>
-          <h3>Be seen first</h3>
-          <p>Early waitlist members get top placement when we launch. Companies will browse candidates — make sure they find you first.</p>
-        </article>
-        <article class="feature-card" role="listitem">
-          <span class="feature-icon" aria-hidden="true">🚀</span>
-          <h3>Companies come to you</h3>
-          <p>No more spray-and-pray applications. Recruiters discover candidates through their content — you get inbound interest.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ── Waitlist Form ── -->
-    <section id="waitlist" aria-labelledby="waitlist-title">
-      <div class="form-container">
-        <p class="section-eyebrow">Prelaunch Waitlist</p>
-        <h2 class="section-title" id="waitlist-title">Be one of the first.</h2>
-        <p class="section-desc">
-          Join early. Upload your video or TikTok handle now and be one of the first candidates companies will see the moment we go live.
-        </p>
-
-        <div class="form-card" role="region" aria-label="Waitlist signup form">
-
-          <!-- Alert messages -->
+        <div class="form-card hero-form-card" id="signup-card" role="region" aria-label="Waitlist signup form">
           <div class="alert alert-error" id="form-error" role="alert" aria-live="polite"></div>
-          <div class="alert alert-success" id="form-success-msg" role="status" aria-live="polite"></div>
 
-          <!-- Success state (replaces form) -->
           <div class="success-state" id="success-state" aria-live="polite">
             <div class="success-emoji" aria-hidden="true">🎉</div>
             <h2>You're on the list!</h2>
             <p>
-              We'll reach out as soon as JobTok launches — and as an early member, you'll be among the first candidates companies discover.<br /><br />
-              <strong>Tell a friend</strong> who's tired of boring job applications.
+              We’ll reach out as soon as JobTok launches. Early members will be the first candidates companies discover.
             </p>
           </div>
 
-          <!-- The form -->
           <form id="waitlist-form" novalidate aria-label="Early access waitlist form">
+            <h2 class="hero-form-title">Get early access</h2>
+            <p class="hero-form-desc">Drop your name, email, and LinkedIn. That’s it for now.</p>
 
-            <!-- Name -->
             <div class="form-group">
-              <label for="name">
+              <label for="full-name">
                 Full Name <span class="req" aria-label="required">*</span>
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
+                id="full-name"
+                name="full-name"
                 placeholder="Ada Lovelace"
                 required
                 autocomplete="name"
@@ -634,7 +487,6 @@
               />
             </div>
 
-            <!-- Email -->
             <div class="form-group">
               <label for="email">
                 Email Address <span class="req" aria-label="required">*</span>
@@ -650,120 +502,59 @@
               />
             </div>
 
-            <div class="divider" aria-hidden="true">
-              <span class="divider-line"></span>
-              <span class="divider-text">Optional — but recommended</span>
-              <span class="divider-line"></span>
-            </div>
-
-            <!-- LinkedIn -->
             <div class="form-group">
               <label for="linkedin">
-                LinkedIn URL <span class="opt">(optional)</span>
+                LinkedIn URL <span class="req" aria-label="required">*</span>
               </label>
               <input
                 type="url"
                 id="linkedin"
                 name="linkedin"
                 placeholder="https://linkedin.com/in/yourhandle"
+                required
                 autocomplete="url"
-                aria-describedby="linkedin-hint"
+                aria-required="true"
               />
             </div>
 
-            <!-- TikTok handle -->
-            <div class="form-group">
-              <label for="tiktok">
-                Professional TikTok Handle <span class="opt">(optional)</span>
-              </label>
-              <input
-                type="text"
-                id="tiktok"
-                name="tiktok"
-                placeholder="@yourhandle"
-                aria-describedby="tiktok-hint"
-              />
-            </div>
-
-            <!-- Resume upload -->
-            <div class="form-group">
-              <label>
-                Resume <span class="opt">(optional)</span>
-              </label>
-              <div
-                class="file-upload-area"
-                id="resume-drop"
-                role="button"
-                tabindex="0"
-                aria-label="Upload your resume"
-              >
-                <input
-                  type="file"
-                  id="resume-file"
-                  name="resume"
-                  accept=".pdf,.doc,.docx"
-                  aria-label="Upload resume file"
-                />
-                <span class="upload-icon" aria-hidden="true">📄</span>
-                <span class="upload-label-text">Click or drag your resume here</span>
-                <span class="upload-hint">PDF, DOC, DOCX · Max 10 MB</span>
-              </div>
-              <div class="file-selected" id="resume-selected" aria-live="polite">
-                <span aria-hidden="true">📄</span>
-                <span class="file-selected-name" id="resume-name"></span>
-                <button type="button" class="file-remove" id="resume-remove" aria-label="Remove resume">✕</button>
-              </div>
-            </div>
-
-            <!-- Video upload -->
-            <div class="form-group">
-              <label>
-                Intro Video <span class="opt">(optional · max 60 sec)</span>
-              </label>
-              <div
-                class="file-upload-area"
-                id="video-drop"
-                role="button"
-                tabindex="0"
-                aria-label="Upload your intro video"
-              >
-                <input
-                  type="file"
-                  id="video-file"
-                  name="video"
-                  accept="video/mp4,video/quicktime,video/webm,video/*"
-                  aria-label="Upload intro video file"
-                />
-                <span class="upload-icon" aria-hidden="true">🎬</span>
-                <span class="upload-label-text">Click or drag your intro video</span>
-                <span class="upload-hint">MP4, MOV, WebM · Max 1 minute · Max 200 MB</span>
-              </div>
-              <div class="video-duration" id="video-duration" aria-live="polite"></div>
-              <div class="file-selected" id="video-selected" aria-live="polite">
-                <span aria-hidden="true">🎬</span>
-                <span class="file-selected-name" id="video-name"></span>
-                <button type="button" class="file-remove" id="video-remove" aria-label="Remove video">✕</button>
-              </div>
-            </div>
-
-            <!-- Submit -->
             <button type="submit" class="btn-submit" id="submit-btn">
               <div class="spinner" id="spinner" aria-hidden="true"></div>
-              <span id="submit-text">🧳 Secure My Spot</span>
+              <span id="submit-text">🧳 Join the Waitlist</span>
             </button>
 
             <p class="form-privacy">
-              🔒 We'll only use your info to notify you about JobTok. No spam, ever.
+              🔒 We’ll only use your info to notify you about JobTok.
             </p>
-
           </form>
-        </div><!-- /.form-card -->
-
-        <div class="social-proof">
-          <p>Join candidates already on the early access list ✦ First on platform · First seen by companies</p>
         </div>
       </div>
     </section>
+
+    <!-- ── Feature cards ── -->
+    <section id="why" aria-labelledby="why-title">
+      <h2 id="why-title" class="sr-only">Why JobTok</h2>
+      <div class="features-grid" role="list">
+        <article class="feature-card" role="listitem">
+          <span class="feature-icon" aria-hidden="true">🎬</span>
+          <h3>Video-first profiles</h3>
+          <p>Create a profile built for short-form attention. Show companies more than a static resume ever could.</p>
+        </article>
+        <article class="feature-card" role="listitem">
+          <span class="feature-icon" aria-hidden="true">🏆</span>
+          <h3>Be seen first</h3>
+          <p>Early waitlist members get top placement when we launch. Companies will browse candidates — make sure they find you first.</p>
+        </article>
+        <article class="feature-card" role="listitem">
+          <span class="feature-icon" aria-hidden="true">🚀</span>
+          <h3>Companies come to you</h3>
+          <p>No more spray-and-pray applications. Recruiters discover candidates through their content — you get inbound interest.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="social-proof">
+      <p>Join the early access list ✦ First on platform · First seen by companies</p>
+    </div>
   </main>
 
   <!-- ── Footer ── -->
@@ -774,11 +565,11 @@
   </footer>
 
   <script>
-    // ── Supabase config — replace these with your project credentials ──
-    const SUPABASE_URL     = 'YOUR_SUPABASE_URL';
-    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // ── Google Forms config — replace these with your actual form values ──
+    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfEt-1CTtuIPJFEGtyXhn4cZj1P4_i1wYfNk1Mwd7A3RHZiBQ/formResponse';
+    const GOOGLE_FORM_NAME_ENTRY_ID = 'entry.940123318';
+    const GOOGLE_FORM_EMAIL_ENTRY_ID = 'entry.1468514227';
+    const GOOGLE_FORM_LINKEDIN_ENTRY_ID = 'entry.2133533279';
 
     // ── DOM refs ──
     const form         = document.getElementById('waitlist-form');
@@ -786,130 +577,7 @@
     const submitText   = document.getElementById('submit-text');
     const spinner      = document.getElementById('spinner');
     const errorBox     = document.getElementById('form-error');
-    const successMsg   = document.getElementById('form-success-msg');
     const successState = document.getElementById('success-state');
-
-    // resume
-    const resumeInput   = document.getElementById('resume-file');
-    const resumeDrop    = document.getElementById('resume-drop');
-    const resumeSelected = document.getElementById('resume-selected');
-    const resumeName    = document.getElementById('resume-name');
-    const resumeRemove  = document.getElementById('resume-remove');
-
-    // video
-    const videoInput    = document.getElementById('video-file');
-    const videoDrop     = document.getElementById('video-drop');
-    const videoSelected = document.getElementById('video-selected');
-    const videoName     = document.getElementById('video-name');
-    const videoRemove   = document.getElementById('video-remove');
-    const videoDurationEl = document.getElementById('video-duration');
-
-    let resumeFile = null;
-    let videoFile  = null;
-    let videoValid = true;
-
-    // ── File helpers ──
-    function formatSize(bytes) {
-      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
-      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-    }
-
-    function setResumeFile(file) {
-      if (!file) return;
-      resumeFile = file;
-      resumeName.textContent = `${file.name} (${formatSize(file.size)})`;
-      resumeSelected.classList.add('visible');
-    }
-
-    function clearResumeFile() {
-      resumeFile = null;
-      resumeInput.value = '';
-      resumeSelected.classList.remove('visible');
-    }
-
-    function checkVideoDuration(file) {
-      return new Promise((resolve, reject) => {
-        const url = URL.createObjectURL(file);
-        const vid = document.createElement('video');
-        vid.preload = 'metadata';
-        vid.onloadedmetadata = () => {
-          URL.revokeObjectURL(url);
-          resolve(vid.duration);
-        };
-        vid.onerror = () => {
-          URL.revokeObjectURL(url);
-          reject(new Error('Could not read video file'));
-        };
-        vid.src = url;
-      });
-    }
-
-    async function setVideoFile(file) {
-      if (!file) return;
-      videoName.textContent = `${file.name} (${formatSize(file.size)})`;
-      videoSelected.classList.add('visible');
-      videoDurationEl.textContent = 'Checking duration…';
-      videoDurationEl.className = 'video-duration';
-
-      try {
-        const dur = await checkVideoDuration(file);
-        if (dur > 60) {
-          videoValid = false;
-          videoDurationEl.textContent = `⚠ ${dur.toFixed(1)}s — video must be 60 seconds or less`;
-          videoDurationEl.className = 'video-duration error';
-        } else {
-          videoFile = file;
-          videoValid = true;
-          videoDurationEl.textContent = `✓ ${dur.toFixed(1)} seconds — looks good!`;
-          videoDurationEl.className = 'video-duration ok';
-        }
-      } catch {
-        videoFile = file; // allow upload, can't check duration
-        videoValid = true;
-        videoDurationEl.textContent = '';
-      }
-    }
-
-    function clearVideoFile() {
-      videoFile = null;
-      videoValid = true;
-      videoInput.value = '';
-      videoSelected.classList.remove('visible');
-      videoDurationEl.textContent = '';
-      videoDurationEl.className = 'video-duration';
-    }
-
-    // ── File input change events ──
-    resumeInput.addEventListener('change', () => {
-      if (resumeInput.files[0]) setResumeFile(resumeInput.files[0]);
-    });
-    videoInput.addEventListener('change', () => {
-      if (videoInput.files[0]) setVideoFile(videoInput.files[0]);
-    });
-
-    resumeRemove.addEventListener('click', clearResumeFile);
-    videoRemove.addEventListener('click', clearVideoFile);
-
-    // ── Drag-and-drop styling ──
-    [resumeDrop, videoDrop].forEach(area => {
-      area.addEventListener('dragover', e => { e.preventDefault(); area.classList.add('drag-over'); });
-      area.addEventListener('dragleave', () => area.classList.remove('drag-over'));
-      area.addEventListener('drop', e => {
-        e.preventDefault();
-        area.classList.remove('drag-over');
-        const file = e.dataTransfer.files[0];
-        if (!file) return;
-        if (area === resumeDrop) setResumeFile(file);
-        else setVideoFile(file);
-      });
-      // keyboard accessibility
-      area.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          area === resumeDrop ? resumeInput.click() : videoInput.click();
-        }
-      });
-    });
 
     // ── Error / success display helpers ──
     function showError(msg) {
@@ -922,20 +590,18 @@
     function setLoading(on) {
       submitBtn.disabled = on;
       spinner.style.display = on ? 'block' : 'none';
-      submitText.textContent = on ? 'Securing your spot…' : '🧳 Secure My Spot';
+      submitText.textContent = on ? 'Joining the waitlist…' : '🧳 Join the Waitlist';
     }
 
-    // ── Upload a file to Supabase Storage ──
-    async function uploadFile(bucket, file) {
-      const ext  = file.name.split('.').pop();
-      const path = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
-      const { error } = await sb.storage.from(bucket).upload(path, file, {
-        cacheControl: '3600',
-        upsert: false,
-      });
-      if (error) throw new Error(`Upload failed: ${error.message}`);
-      const { data } = sb.storage.from(bucket).getPublicUrl(path);
-      return data.publicUrl;
+    function googleFormConfigured() {
+      return ![
+        GOOGLE_FORM_ACTION,
+        GOOGLE_FORM_NAME_ENTRY_ID,
+        GOOGLE_FORM_EMAIL_ENTRY_ID,
+        GOOGLE_FORM_LINKEDIN_ENTRY_ID,
+      ].some(value =>
+        value.includes('YOUR_')
+      );
     }
 
     // ── Form submission ──
@@ -943,62 +609,44 @@
       e.preventDefault();
       clearError();
 
-      const name     = document.getElementById('name').value.trim();
-      const email    = document.getElementById('email').value.trim();
+      const fullName = document.getElementById('full-name').value.trim();
+      const email = document.getElementById('email').value.trim();
       const linkedin = document.getElementById('linkedin').value.trim();
-      const tiktok   = document.getElementById('tiktok').value.trim();
 
       // Validate required fields
-      if (!name) { showError('Please enter your name.'); return; }
+      if (!fullName) {
+        showError('Please enter your full name.');
+        return;
+      }
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showError('Please enter a valid email address.');
         return;
       }
-      if (!videoValid) {
-        showError('Your intro video is over 60 seconds. Please upload a shorter clip.');
+      if (!linkedin || !/^https:\/\/(www\.)?linkedin\.com\/.+/i.test(linkedin)) {
+        showError('Please enter a valid LinkedIn URL starting with https://linkedin.com/');
         return;
       }
-
-      // Validate optional URL fields
-      if (linkedin && !/^https?:\/\//i.test(linkedin)) {
-        showError('LinkedIn URL should start with https://');
+      if (!googleFormConfigured()) {
+        showError('Google Form is not configured yet. Add the form action URL and entry IDs in the script.');
         return;
       }
 
       setLoading(true);
 
       try {
-        let resumeUrl = null;
-        let videoUrl  = null;
+        const body = new URLSearchParams();
+        body.append(GOOGLE_FORM_NAME_ENTRY_ID, fullName);
+        body.append(GOOGLE_FORM_EMAIL_ENTRY_ID, email);
+        body.append(GOOGLE_FORM_LINKEDIN_ENTRY_ID, linkedin);
 
-        if (resumeFile) {
-          resumeUrl = await uploadFile('resumes', resumeFile);
-        }
-        if (videoFile) {
-          videoUrl = await uploadFile('videos', videoFile);
-        }
-
-        // Normalize tiktok handle: strip leading @
-        const tiktokHandle = tiktok ? tiktok.replace(/^@/, '') : null;
-
-        const { error: dbError } = await sb.from('waitlist').insert([{
-          name,
-          email,
-          linkedin_url:    linkedin || null,
-          tiktok_handle:   tiktokHandle || null,
-          resume_url:      resumeUrl,
-          video_url:       videoUrl,
-        }]);
-
-        if (dbError) {
-          if (dbError.code === '23505') {
-            showError("You're already on the waitlist with that email! We'll be in touch.");
-          } else {
-            throw new Error(dbError.message);
-          }
-          setLoading(false);
-          return;
-        }
+        await fetch(GOOGLE_FORM_ACTION, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+          body: body.toString(),
+        });
 
         // Success
         form.style.display = 'none';
