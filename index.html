@@ -501,13 +501,13 @@
 
             <div class="form-group">
               <label for="email">
-                Email Address <span class="req" aria-label="required">*</span>
+                School Email (.edu) <span class="req" aria-label="required">*</span>
               </label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                placeholder="ada@example.com"
+                placeholder="ada@stanford.edu"
                 required
                 autocomplete="email"
                 aria-required="true"
@@ -630,8 +630,8 @@
         showError('Please enter your full name.');
         return;
       }
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showError('Please enter a valid email address.');
+      if (!email || !/^[^\s@]+@[^\s@]+\.edu$/i.test(email)) {
+        showError('Please enter a valid .edu email address.');
         return;
       }
       if (!linkedin || !/^https:\/\/(www\.)?linkedin\.com\/.+/i.test(linkedin)) {
