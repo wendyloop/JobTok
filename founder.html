@@ -150,142 +150,85 @@
 
     /* ── Hero ── */
     #hero {
-      padding: 72px 24px 56px;
+      padding: 56px 24px 40px;
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
     #hero::before {
       content: '';
       position: absolute;
-      top: -120px;
+      top: -100px;
       left: 50%;
       transform: translateX(-50%);
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, rgba(245,205,40,0.35) 0%, transparent 70%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(245,205,40,0.3) 0%, transparent 70%);
       pointer-events: none;
     }
-    .hero-layout {
-      max-width: 1080px;
+    .hero-inner {
+      max-width: 560px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 440px);
-      gap: 32px;
-      align-items: center;
+      position: relative;
     }
-    .hero-copy { text-align: left; }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       background: var(--black);
       color: var(--yellow);
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 6px 14px;
+      padding: 5px 13px;
       border-radius: 999px;
-      margin-bottom: 28px;
+      margin-bottom: 22px;
     }
     .hero-badge::before { content: '✦'; }
     h1 {
-      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-size: clamp(2.2rem, 7vw, 3.6rem);
       font-weight: 900;
-      line-height: 1.06;
-      letter-spacing: -2.5px;
+      line-height: 1.08;
+      letter-spacing: -2px;
       color: var(--black);
-      max-width: 680px;
-      margin: 0 0 20px;
+      margin: 0 0 16px;
     }
     h1 em {
       position: relative;
       font-style: normal;
-      padding: 0 10px 2px;
+      padding: 0 8px 2px;
       display: inline-block;
-      line-height: 1.1;
       z-index: 0;
     }
     h1 em::before {
       content: '';
       position: absolute;
-      left: 2px;
-      right: 0;
-      top: 52%;
-      bottom: 4%;
+      left: 2px; right: 0;
+      top: 52%; bottom: 4%;
       background: rgba(245, 205, 40, 0.42);
       border-radius: 999px 14px 999px 18px;
       transform: rotate(-1.4deg) skewX(-8deg);
       z-index: -1;
-      box-shadow: 0 0 0 1px rgba(245, 205, 40, 0.08);
     }
     .hero-sub {
-      font-size: clamp(1.05rem, 2.5vw, 1.22rem);
-      color: var(--gray-700);
-      max-width: 560px;
-      margin: 0 0 24px;
+      font-size: 1rem;
+      color: var(--gray-500);
+      margin: 0 0 32px;
       font-weight: 500;
       line-height: 1.55;
     }
-    .hero-note {
-      font-size: 0.84rem;
-      color: var(--gray-500);
-      font-weight: 600;
-    }
-    .hero-form-card {
-      position: relative;
-      z-index: 1;
-    }
-    .hero-form-title {
-      font-size: 1.5rem;
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.8px;
-      color: var(--black);
-      margin-bottom: 8px;
-    }
-    .hero-form-desc {
-      font-size: 0.88rem;
-      color: var(--gray-500);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    /* ── Features ── */
-    #why {
-      padding: 64px 24px;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .feature-card {
-      background: var(--white);
-      border: 1px solid rgba(245,205,40,0.3);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: var(--shadow-sm);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-    .feature-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
-    .feature-card h3 {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--black);
-      margin-bottom: 8px;
-      letter-spacing: -0.2px;
-    }
-    .feature-card p { font-size: 0.88rem; color: var(--gray-500); line-height: 1.6; }
 
     /* ── Form Card ── */
+    .form-wrap {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
     .form-card {
       background: var(--white);
       border-radius: var(--radius-lg);
-      padding: 32px 28px;
+      padding: 28px 24px;
       box-shadow: var(--shadow-lg);
       border: 1px solid rgba(245,205,40,0.2);
     }
@@ -404,13 +347,6 @@
     }
     .success-state p { font-size: 0.92rem; color: var(--gray-500); line-height: 1.6; }
 
-    /* ── Social proof ── */
-    .social-proof {
-      text-align: center;
-      padding: 20px 24px 0;
-    }
-    .social-proof p { font-size: 0.8rem; color: var(--gray-500); font-weight: 500; }
-
     /* ── Footer ── */
     footer {
       text-align: center;
@@ -425,14 +361,8 @@
     footer p { font-size: 0.78rem; color: var(--gray-500); }
 
     /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .hero-layout { grid-template-columns: 1fr; gap: 24px; }
-      .hero-copy { text-align: center; }
-      h1, .hero-sub { margin-left: auto; margin-right: auto; }
-    }
-    @media (max-width: 560px) {
-      .form-card { padding: 24px 18px; }
-      h1 { letter-spacing: -1.5px; }
+    @media (max-width: 480px) {
+      h1 { letter-spacing: -1.2px; }
       .nav-link { display: none; }
     }
   </style>
@@ -457,115 +387,78 @@
   </nav>
 
   <main>
-    <!-- ── Hero ── -->
     <section id="hero" aria-labelledby="hero-headline">
-      <div class="hero-layout">
-        <div class="hero-copy">
-          <div class="hero-badge" aria-label="Status: For Companies — Early Access">For Companies · Early Access</div>
-          <h1 id="hero-headline">
-            Stop posting<br />
-            into the void.<br />
-            <em>Find who's hungry.</em>
-          </h1>
-          <p class="hero-sub">
-            JobTok is the video-first recruiting platform. Browse candidates who show you who they are — not just what they've listed on a PDF. Your next great hire has a TikTok.
-          </p>
-          <p class="hero-note">🏆 Early company partners get founding-tier access &amp; priority placement</p>
+      <div class="hero-inner">
+        <div class="hero-badge">For Hiring Teams · Early Access</div>
+        <h1 id="hero-headline">
+          Know the vibe<br />
+          <em>before the interview.</em>
+        </h1>
+        <p class="hero-sub">
+          JobTok screens for culture fit first — through short videos, not bullet points. Get early access and be first to browse our candidate pool.
+        </p>
+      </div>
+    </section>
+
+    <div class="form-wrap">
+      <div class="form-card" role="region" aria-label="Company early access form">
+
+        <div class="alert alert-error" id="form-error" role="alert" aria-live="polite"></div>
+
+        <div class="success-state" id="success-state" aria-live="polite">
+          <div class="success-emoji" aria-hidden="true">🎉</div>
+          <h2>You're in.</h2>
+          <p>We'll reach out personally when JobTok launches. Founding partners get first access to the full candidate pool.</p>
         </div>
 
-        <!-- ── Signup Card ── -->
-        <div class="form-card hero-form-card" id="signup-card" role="region" aria-label="Company early access form">
-
-          <div class="alert alert-error" id="form-error" role="alert" aria-live="polite"></div>
-
-          <div class="success-state" id="success-state" aria-live="polite">
-            <div class="success-emoji" aria-hidden="true">🎉</div>
-            <h2>You're in.</h2>
-            <p>
-              We'll reach out personally when JobTok launches. As a founding company partner, you'll get first access to our candidate pool before we open to the public.
-            </p>
+        <form id="founder-form" novalidate aria-label="Company early access waitlist form">
+          <div class="form-group">
+            <label for="contact-name">Your Name</label>
+            <input
+              type="text"
+              id="contact-name"
+              name="contact-name"
+              placeholder="Jane Smith"
+              required
+              autocomplete="name"
+              aria-required="true"
+            />
           </div>
 
-          <form id="founder-form" novalidate aria-label="Company early access waitlist form">
-            <h2 class="hero-form-title">Get early access</h2>
-            <p class="hero-form-desc">Three fields. That's it. We'll be in touch when we launch.</p>
+          <div class="form-group">
+            <label for="email">Work Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="jane@yourcompany.com"
+              required
+              autocomplete="email"
+              aria-required="true"
+            />
+          </div>
 
-            <div class="form-group">
-              <label for="contact-name">Your Name</label>
-              <input
-                type="text"
-                id="contact-name"
-                name="contact-name"
-                placeholder="Jane Smith"
-                required
-                autocomplete="name"
-                aria-required="true"
-              />
-            </div>
+          <div class="form-group">
+            <label for="company-name">Company Name</label>
+            <input
+              type="text"
+              id="company-name"
+              name="company-name"
+              placeholder="Acme Corp"
+              required
+              autocomplete="organization"
+              aria-required="true"
+            />
+          </div>
 
-            <div class="form-group">
-              <label for="email">Work Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="jane@yourcompany.com"
-                required
-                autocomplete="email"
-                aria-required="true"
-              />
-            </div>
+          <button type="submit" class="btn-submit" id="submit-btn">
+            <div class="spinner" id="spinner" aria-hidden="true"></div>
+            <span id="submit-text">🧳 Reserve Early Access</span>
+          </button>
 
-            <div class="form-group">
-              <label for="company-name">Company Name</label>
-              <input
-                type="text"
-                id="company-name"
-                name="company-name"
-                placeholder="Acme Corp"
-                required
-                autocomplete="organization"
-                aria-required="true"
-              />
-            </div>
-
-            <button type="submit" class="btn-submit" id="submit-btn">
-              <div class="spinner" id="spinner" aria-hidden="true"></div>
-              <span id="submit-text">🧳 Reserve Our Spot</span>
-            </button>
-
-            <p class="form-privacy">
-              🔒 We'll only use your info to notify you about JobTok.
-            </p>
-          </form>
-        </div>
+          <p class="form-privacy">🔒 No spam. Just a heads-up when we launch.</p>
+        </form>
       </div>
-    </section>
-
-    <!-- ── Feature Cards ── -->
-    <section id="why" aria-labelledby="why-title">
-      <h2 id="why-title" class="sr-only">Why JobTok for Companies</h2>
-      <div class="features-grid" role="list">
-        <article class="feature-card" role="listitem">
-          <span class="feature-icon" aria-hidden="true">🎥</span>
-          <h3>See personality first</h3>
-          <p>Browse 60-second video profiles and know within seconds if someone has the energy your team needs — before you ever book a call.</p>
-        </article>
-        <article class="feature-card" role="listitem">
-          <span class="feature-icon" aria-hidden="true">🎯</span>
-          <h3>Reach passive talent</h3>
-          <p>The best candidates aren't refreshing job boards. They're creating content. JobTok puts your open roles in front of people who aren't actively looking — but would be perfect.</p>
-        </article>
-        <article class="feature-card" role="listitem">
-          <span class="feature-icon" aria-hidden="true">⚡</span>
-          <h3>Cut time-to-hire</h3>
-          <p>Skip the cold screening rounds. When you've already seen someone on video, the first real conversation is so much warmer. Less back-and-forth, faster decisions.</p>
-        </article>
-      </div>
-    </section>
-
-    <div class="social-proof">
-      <p>Founding companies get priority access · First look at our full candidate pool · Founding-tier pricing</p>
     </div>
   </main>
 
@@ -576,8 +469,7 @@
       <a href="/">For Candidates</a>
       <a href="/founder.html">For Companies</a>
     </div>
-    <p>TikTok for recruiting. Your next hire has a TikTok.</p>
-    <p style="margin-top: 8px;">© 2025 JobTok. All rights reserved.</p>
+    <p>© 2025 JobTok. All rights reserved.</p>
   </footer>
 
   <script>
