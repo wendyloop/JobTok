@@ -122,6 +122,10 @@
       gap: 6px;
     }
     .nav-cta:hover { background: var(--charcoal); transform: translateY(-1px); }
+    .nav-legal-links { display: flex; align-items: center; gap: 16px; }
+    .nav-legal-links a { font-size: 0.78rem; font-weight: 600; color: var(--gray-500); text-decoration: none; transition: color var(--transition); white-space: nowrap; }
+    .nav-legal-links a:hover { color: var(--black); }
+    @media (max-width: 700px) { .nav-legal-links { display: none; } }
 
     /* ── Hero ── */
     #hero {
@@ -411,8 +415,11 @@
       font-size: 1.1rem;
       font-weight: 800;
       color: var(--black);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 20px; margin-bottom: 10px; }
+    .footer-links a { font-size: 0.78rem; color: var(--gray-500); text-decoration: none; font-weight: 500; }
+    .footer-links a:hover { color: var(--black); }
     footer p {
       font-size: 0.78rem;
       color: var(--gray-500);
@@ -448,6 +455,11 @@
         <span aria-hidden="true">🧳</span>
         Scout22
       </a>
+      <div class="nav-legal-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms-of-use.html">Terms of Use</a>
+        <a href="/terms-of-service.html">Terms of Service</a>
+      </div>
       <a class="nav-cta" href="#signup-card" aria-label="Join the early waitlist">
         Join Waitlist ↓
       </a>
@@ -572,8 +584,14 @@
   <!-- ── Footer ── -->
   <footer>
     <div class="footer-logo">🧳 Scout22</div>
-    <p>TikTok for recruiting. Your resume is boring. You're not.</p>
-    <p style="margin-top: 8px;">© 2025 Scout22. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="/">For Candidates</a>
+      <a href="/founder.html">For Companies</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms-of-use.html">Terms of Use</a>
+      <a href="/terms-of-service.html">Terms of Service</a>
+    </div>
+    <p>© 2026 Scout22. All rights reserved.</p>
   </footer>
 
   <script>
