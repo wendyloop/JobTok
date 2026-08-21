@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["42AKPHSLM9.com.tryscout22.scout22"],
+        "components": [
+          { "/": "/j/*", "comment": "Job share links open the job in the app" }
+        ]
+      }
+    ]
+  }
+}
