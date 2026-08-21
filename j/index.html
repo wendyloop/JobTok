@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open in scout22</title>
+  <meta name="description" content="Startup jobs you can pitch the founder for.">
+  <meta property="og:title" content="scout22">
+  <meta property="og:description" content="Startup jobs you can pitch the founder for.">
+  <meta property="og:site_name" content="scout22">
+  <meta property="og:type" content="website">
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: #f7f2e6; color: #111; padding: 24px;
+    }
+    @media (prefers-color-scheme: dark) { body { background: #08080a; color: #fff; } }
+    .card { width: 100%; max-width: 420px; text-align: center; }
+    .logo { width: 76px; height: 76px; border-radius: 18px; object-fit: cover; margin-bottom: 18px; }
+    h1 { font-size: 25px; line-height: 1.25; margin: 0 0 6px; }
+    .company { font-size: 17px; font-weight: 600; opacity: .85; margin: 0 0 6px; }
+    .facts { font-size: 15px; opacity: .6; margin: 0 0 28px; }
+    a.btn, button.btn {
+      display: block; width: 100%; padding: 15px 20px; border-radius: 14px; border: 0;
+      font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer;
+      font-family: inherit; margin-bottom: 10px;
+    }
+    .primary { background: #c8ff4d; color: #000; }
+    .secondary { background: rgba(127,127,127,.16); color: inherit; }
+    .brand { margin-top: 26px; font-size: 13px; opacity: .45; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img id="logo" class="logo hidden" alt="">
+    <h1 id="title">Open in scout22</h1>
+    <p id="company" class="company hidden"></p>
+    <p id="facts" class="facts">Startup jobs you can pitch the founder for.</p>
+    <a id="appstore" class="btn primary" href="https://apps.apple.com/us/app/scout22/id6796603687">Get the app</a>
+    <button id="openapp" class="btn secondary hidden" type="button">Open in app</button>
+    <div class="brand">scout22 — pitch the founder, skip the black hole</div>
+  </div>
+
+<script>
+// Universal links mean anyone with the app installed never reaches this page —
+// iOS hands the URL straight to scout22. So this is the not-installed path:
+// show enough about the job to make installing worth it, then get out of the way.
+//
+// The job is fetched from the job-share function rather than the database
+// directly, because the jobs table is authenticated-only and this page has no
+// session. That function is public and already publishes these same fields.
+(function () {
+  var FN = "https://zqfurscyhmxlvrfendnc.supabase.co/functions/v1/job-share";
+  var parts = location.pathname.split("/").filter(Boolean);
+  var id = parts[parts.length - 1];
+  if (!id || id === "j" || !/^[0-9a-f-]{36}$/i.test(id)) {
+    id = new URLSearchParams(location.search).get("id");
+  }
+  if (!id) return;
+
+  var show = function (el) { el.classList.remove("hidden"); };
+
+  fetch(FN + "/" + encodeURIComponent(id) + "?format=json")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (job) {
+      if (!job) return;
+      document.title = job.title + " — scout22";
+      document.getElementById("title").textContent = job.title;
+      if (job.company) {
+        var c = document.getElementById("company");
+        c.textContent = job.company;
+        show(c);
+      }
+      var facts = [job.compensation, job.location].filter(Boolean);
+      document.getElementById("facts").textContent =
+        facts.length ? facts.join("  ·  ") : "Open role";
+      if (job.logo) {
+        var img = document.getElementById("logo");
+        img.src = job.logo;
+        img.alt = (job.company || "") + " logo";
+        show(img);
+      }
+      if (job.app_store_url) {
+        document.getElementById("appstore").href = job.app_store_url;
+      }
+      // Legacy escape hatch: someone on an old build, where the universal
+      // link isn't registered, can still jump across via the custom scheme.
+      if (job.deep_link) {
+        var open = document.getElementById("openapp");
+        open.addEventListener("click", function () { location.href = job.deep_link; });
+        show(open);
+      }
+    })
+    .catch(function () { /* the Get the app button already works */ });
+})();
+</script>
+</body>
+</html>
